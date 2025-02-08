@@ -2,7 +2,7 @@ name: Daily Scraper
 
 on:
   schedule:
-    - cron: "30 2 * * *"  # Runs daily at 02:30 UTC (modify as needed)
+    - cron: "30 2 * * *"  # Runs daily at 02:30 UTC
   workflow_dispatch:  # Allows manual triggering
 
 jobs:
@@ -20,8 +20,9 @@ jobs:
 
       - name: Commit and Push Changes
         run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git add *.json
-          git commit -m "Daily Scraper Update [skip ci]" || exit 0
-          git push
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git pull origin main  # Prevents conflicts
+          git add .
+          git commit -m "Daily update [skip ci]" || exit 0
+          git push origin main
