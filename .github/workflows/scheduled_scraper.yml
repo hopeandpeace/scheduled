@@ -18,10 +18,6 @@ jobs:
       - name: Install Dependencies
         uses: astral-sh/setup-uv@v5
 
-      - name: Run Scraper - 23f2000057@ds.study.iitm.ac.in
-        run: |
-          uv run --with httpx,lxml,cssselect python scrape.py
-
       - name: Commit and Push Changes
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
